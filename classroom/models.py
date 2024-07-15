@@ -1,8 +1,8 @@
 from django.db import models
 
+from django.db import models
 
-
-class Classes (models.Model):
+class Classroom(models.Model):
     class_name = models.CharField(max_length=20)
     class_id = models.PositiveSmallIntegerField()
     class_course = models.CharField(max_length=20)
