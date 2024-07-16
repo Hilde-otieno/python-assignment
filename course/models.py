@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Courses(models.Model):
+class Course(models.Model):
     course_name = models.CharField(max_length=20)
     course_code = models.PositiveSmallIntegerField()
     course_term = models.CharField(max_length=10)
