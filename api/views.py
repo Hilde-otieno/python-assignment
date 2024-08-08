@@ -163,3 +163,11 @@ class StudentDetailView(APIView):
         else:
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         
+class StudentListView(APIView):
+    def get (self, request):
+        Student = Student.objects.all()
+        first_name = request.query_params.get("first_name")
+        if first_name:
+            Student = Student.filter(first_name = first_name)
+            serializer = StudentSerializer(Student,many = true)
+            return Response(serializer.data)
