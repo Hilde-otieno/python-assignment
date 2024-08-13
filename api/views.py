@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .serializers import Class_PeriodSerializer, CourseSerializer, ClassroomSerializer, StudentSerializer, TeacherSerializer
+from .serializers import Class_PeriodSerializer, CourseSerializer, ClassroomSerializer, StudentSerializer, TeacherSerializer, countrySerialize
 from classperiod.models import Class_Period
 from rest_framework import status
 from course.models import Course
@@ -171,3 +171,33 @@ class StudentListView(APIView):
             Student = Student.filter(first_name = first_name)
             serializer = StudentSerializer(Student,many = true)
             return Response(serializer.data)
+        
+class CountryListView(APIView):
+    def get (self, request):
+        Student = Student.objects.all()
+        first_name = request.query_params.get("first_name")
+        if Country:
+            Student = Student.objects.filter(country = Country)
+        if first_name:
+            Student = Student.filter(first_name = first_name)
+            serializer = StudentSerializer(Student,many = true)
+            return Response(serializer.data)
+        
+class StudentDetailView (APIView):
+    def enroll_Student(self, student, course_id):
+        Course = Course.objects.get(id=course_id):
+        student.course.add(Course)
+
+    def post(self, request,id):
+        Student = Student.objects.put(id:id)
+        action = request.data.get("action")
+
+        if action == "enroll"
+        course_id = request.data.get(
+            "course_id")
+        self.enroll_Student(
+            Student, course_id
+        )
+        return Response(
+            status=status.HTTP_202_ACCEPTED
+        )
